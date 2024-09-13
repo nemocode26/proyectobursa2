@@ -7,6 +7,7 @@ const cors=require('cors')
 require('./bd.js')
 //rutas
 
+const userRouter=require("../src/routes/userRouter.js")
 const server=express()
 server.name="API"
 
@@ -33,6 +34,8 @@ server.use((req, res, next) => {
 server.use(express.json())
 server.use(cors())
 //routers
+
+server.use("/",userRouter)
 
 server.use((err,req,res)=>{
     const status=err.status || 500
