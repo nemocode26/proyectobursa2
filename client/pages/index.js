@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "@/styles/Home.module.css";
 import { useState } from "react";
 import { postUser } from "./api/postUser";
@@ -8,6 +8,15 @@ export default function Home() {
     username: "",
     password: "",
   });
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    fetch(`http://localhost:3001/user`)
+      .then((res) => res.json())
+      .then((data) => {
+        setUser(data);
+      });
+  }, []);
 
   function handleChange(e) {
     setInput({
@@ -24,7 +33,7 @@ export default function Home() {
       }
     });
   }
-
+  console.log("user", user);
   return (
     <>
       <h1>El problema son ustedes giles</h1>
@@ -49,6 +58,12 @@ export default function Home() {
 
         <button type="submit">enviar</button>
       </form>
+
+      {
+        user!==null && user.length>0?
+        user.map(e=><h1>{e.username}</h1>)
+        :null
+      }
     </>
   );
 }

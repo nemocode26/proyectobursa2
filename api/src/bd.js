@@ -4,7 +4,9 @@ const path=require('path');
 const { error } = require('console');
 const { connect } = require('http2');
 
-const sequelize=new Sequelize(`postgres://postgres:Losjimmyenbasani@localhost:5432/proyectoBursa`)
+const sequelize=new Sequelize(`postgres://postgres:Losjimmyenbasani@localhost:5432/proyectoBursa`, {
+    logging:false
+})
 
 const basename = path.basename ( __filename);
 const modelDefiners = [];
